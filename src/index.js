@@ -1,9 +1,11 @@
 /* doctest */
 /*
  * Usage:
- * run({
- *  pathEntryJS: __dirname + './repo.js',
- *  pathOutput: __dirname + '../bundle/',
+ *
+ * var webpackSimpleServer = require('webpack-simple-server');
+ * webpackSimpleServer({
+ *  entry: __dirname + './repo.js',
+ *  outputDir: __dirname + '../bundle/',
  *  title: 'Repo',
  * });
  */
@@ -37,20 +39,20 @@ var getFileNameNoExt = function(pathStr) {
   return filename.replace(/\.[^\.]*$/, '');
 };
 
-var makeWebpackConfig = function(pathEntryJS, pathOutput) {
-  assert.string(pathEntryJS, 'pathEntryJS');
-  assert.string(pathOutput, 'pathOutput');
+var makeWebpackConfig = function(entry, outputDir) {
+  assert.string(entry, 'entry');
+  assert.string(outputDir, 'outputDir');
 
   return {
     entry: {
       app: [
-        pathEntryJS,
+        entry,
         'webpack-dev-server/client?http://localhost:8087',
         'webpack/hot/dev-server'],
     },
     output: {
-      path: path.resolve(pathOutput),
-      filename: getFileName(pathEntryJS),
+      path: path.resolve(outputDir),
+      filename: getFileName(entry),
     },
     debug: true,
     devtool: 'sourcemap',
@@ -111,14 +113,14 @@ var writeHTML = function(pathHTML, html) {
   debug('r:html')('saved html to', path.resolve(pathHTML));
 };
 
-var makeWebpackDevserverConfig = function(filename, pathOutput) {
+var makeWebpackDevserverConfig = function(filename, outputDir) {
   assert.string(filename, 'filename');
-  assert.string(pathOutput, 'pathOutput');
+  assert.string(outputDir, 'outputDir');
 
   return {
     // webpack-dev-server options
 
-    contentBase: pathOutput,
+    contentBase: outputDir,
     // or: contentBase: "http://localhost/",
 
     hot: true,
@@ -149,25 +151,25 @@ var makeWebpackDevserverConfig = function(filename, pathOutput) {
 };
 
 var makeCompiler = function(config) {
-  var webpackConfig = makeWebpackConfig(config.pathEntryJS, config.pathOutput);
+  var webpackConfig = makeWebpackConfig(config.entry, config.outputDir);
   debug('r:webpackConfig')(webpackConfig);
   return webpack(webpackConfig);
 };
 
-// saveHTML({ pathEntryJS: './repo.js', 'pathOutput': '../bundle/' })
+// saveHTML({ entry: './repo.js', 'outputDir': '../bundle/' })
 var saveHTML = function(config) {
-  var filename = getFileName(config.pathEntryJS);
-  var filenameNoExt = getFileNameNoExt(config.pathEntryJS);
+  var filename = getFileName(config.entry);
+  var filenameNoExt = getFileNameNoExt(config.entry);
   var html = makeHTMLString(filename, filenameNoExt);
-  var pathHTML = path.join(config.pathOutput, 'index.html');
+  var pathHTML = path.join(config.outputDir, 'index.html');
   writeHTML(pathHTML, html);
 };
 
 var makeServer = function(config, compiler) {
   assert.object(compiler, 'compiler');
   var webpackDevserverConfig = makeWebpackDevserverConfig(
-    getFileName(config.pathEntryJS),
-    config.pathOutput);
+    getFileName(config.entry),
+    config.outputDir);
   debug('r:webpack')('webpackDevServerConfig', webpackDevserverConfig);
   return new WebpackDevServer(compiler, webpackDevserverConfig);
 };
@@ -175,8 +177,8 @@ var makeServer = function(config, compiler) {
 // run
 module.exports = function(config) {
   assert.object(config, 'config');
-  assert.string(config.pathEntryJS, 'config.pathEntryJS');
-  assert.string(config.pathOutput, 'config.pathOutput');
+  assert.string(config.entry, 'config.entry');
+  assert.string(config.outputDir, 'config.outputDir');
 
   saveHTML(config);
   var compiler = makeCompiler(config);
