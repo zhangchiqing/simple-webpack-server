@@ -2,8 +2,8 @@
 /*
  * Usage:
  *
- * var webpackSimpleServer = require('webpack-simple-server');
- * webpackSimpleServer({
+ * var simpleWebpackServer = require('simple-webpack-server');
+ * simpleWebpackServer({
  *  entry: __dirname + './repo.js',
  *  outputDir: __dirname + '../bundle/',
  *  title: 'Repo',

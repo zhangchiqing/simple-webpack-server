@@ -1,5 +1,5 @@
 {
-  "name": "webpack-simple-server",
+  "name": "simple-webpack-server",
   "version": "0.1.0",
   "description": "Simplified webpack-dev-server to debug your module",
   "main": "./src/index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhangchiqing/webpack-simple-server.git"
+    "url": "git+https://github.com/zhangchiqing/simple-webpack-server.git"
   },
   "keywords": [
     "webpack",
@@ -20,9 +20,9 @@
   "author": "Leo Zhang",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zhangchiqing/webpack-simple-server/issues"
+    "url": "https://github.com/zhangchiqing/simple-webpack-server/issues"
   },
-  "homepage": "https://github.com/zhangchiqing/webpack-simple-server#readme",
+  "homepage": "https://github.com/zhangchiqing/simple-webpack-server#readme",
   "devDependencies": {
     "doctest": "^0.10.0"
   },
