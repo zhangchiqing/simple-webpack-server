@@ -4,7 +4,7 @@ This server should be used for DEVELOPMENT ONLY.
 
 The webpack-simple-server is a little node.js app which uses webpack-dev-server to serve your module for easy development and debugging.
 
-- It automatically generates the html file needed for webpack-dev-server to serve your module.
+- It automatically generates the html file needed for webpack-dev-server to serve your module (For example, a ReactJS component).
 - Supports CommonJS style javascript module.
 - Updates the browser on changes.
 - CSS loader included.
@@ -18,13 +18,13 @@ npm install --save-dev webpack-simple-server
 ```
 
 ## Usage
-### 1. Create a file `tests/main.js`
+### 1. Create a file `debugging.js`
 ```
 var webpackSimpleServer = require('webpack-simple-server');
 
 webpackSimpleServer({
-  entry: __dirname + '/../src/main.js',
-  output: __dirname + '/../bundle/',
+  entry: __dirname + '/src/myModule.js',
+  output: __dirname + '/bundle/',
   title: 'Repo',
 });
 
@@ -32,7 +32,7 @@ webpackSimpleServer({
 
 ### 2. Run
 ```
-node ./tests/main.js
+node debugging.js
 ```
 
 ### 3. Visit `http://localhost:8087/` to view your module
