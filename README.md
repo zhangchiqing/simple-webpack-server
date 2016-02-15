@@ -25,7 +25,7 @@ var webpackSimpleServer = require('webpack-simple-server');
 webpackSimpleServer({
   entry: __dirname + '/src/myModule.js',
   output: __dirname + '/bundle/',
-  title: 'Repo',
+  title: 'myModule',
 });
 
 ```
