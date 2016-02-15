@@ -1,0 +1,36 @@
+{
+  "name": "webpack-simple-server",
+  "version": "0.1.0",
+  "description": "",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "doctest --module commonjs src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhangchiqing/webpack-simple-server.git"
+  },
+  "keywords": [
+    "webpack",
+    "dev-server",
+    "unit",
+    "test",
+    "debug"
+  ],
+  "author": "Leo Zhang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhangchiqing/webpack-simple-server/issues"
+  },
+  "homepage": "https://github.com/zhangchiqing/webpack-simple-server#readme",
+  "devDependencies": {
+    "doctest": "^0.10.0"
+  },
+  "dependencies": {
+    "assert-plus": "^1.0.0",
+    "css-loader": "^0.23.1",
+    "debug": "^2.2.0",
+    "webpack": "^1.12.13",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
