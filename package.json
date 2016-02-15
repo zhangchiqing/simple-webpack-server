@@ -1,7 +1,7 @@
 {
   "name": "simple-webpack-server",
-  "version": "0.1.0",
-  "description": "Simplified webpack-dev-server to debug your module",
+  "version": "0.1.1",
+  "description": "Simplified webpack-dev-server for developing your module",
   "main": "./src/index.js",
   "scripts": {
     "test": "doctest --module commonjs src/index.js"

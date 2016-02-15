@@ -1,4 +1,4 @@
-# Webpack Simple Server
+# Simple Webpack Server
 
 This server should be used for DEVELOPMENT ONLY.
 
@@ -9,6 +9,7 @@ The simple-webpack-server is a little node.js app which uses webpack-dev-server 
 - Updates the browser on changes.
 - CSS loader included.
 - Source mapping enabled.
+- No need to create webpack.config.js
 
 ## Get started
 ```
