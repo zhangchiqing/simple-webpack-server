@@ -6,6 +6,9 @@
   "scripts": {
     "test": "doctest --module commonjs src/index.js"
   },
+  "engines": {
+    "node": ">=0.12"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zhangchiqing/simple-webpack-server.git"
