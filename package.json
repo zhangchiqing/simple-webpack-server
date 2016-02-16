@@ -1,6 +1,6 @@
 {
   "name": "simple-webpack-server",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simplified webpack-dev-server for developing your module",
   "main": "./src/index.js",
   "scripts": {
@@ -32,7 +32,7 @@
     "debug": "^2.2.0"
   },
   "peerDependencies": {
-    "webpack": "^1.12.13",
-    "webpack-dev-server": "^1.14.1"
+    "webpack": "^1.12.0",
+    "webpack-dev-server": "^1.14.0"
   }
 }
