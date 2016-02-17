@@ -15,6 +15,7 @@ var path = require('path');
 var fs = require('fs');
 var assert = require('assert-plus');
 var debug = require('debug');
+var R = require('ramda');
 
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
@@ -39,11 +40,11 @@ var getFileNameNoExt = function(pathStr) {
   return filename.replace(/\.[^\.]*$/, '');
 };
 
-var makeWebpackConfig = function(entry, outputDir) {
+var makeWebpackConfig = function(entry, outputDir, options) {
   assert.string(entry, 'entry');
   assert.string(outputDir, 'outputDir');
 
-  return {
+  return R.merge({
     entry: {
       app: [
         entry,
@@ -62,7 +63,7 @@ var makeWebpackConfig = function(entry, outputDir) {
             { test: /\.css$/, loader: 'style-loader!css-loader' }
         ]
     }
-  };
+  }, options);
 };
 
 var makeJS = function(compiler) {
@@ -151,7 +152,10 @@ var makeWebpackDevserverConfig = function(filename, outputDir) {
 };
 
 var makeCompiler = function(config) {
-  var webpackConfig = makeWebpackConfig(config.entry, config.outputDir);
+  var webpackConfig = makeWebpackConfig(
+    config.entry,
+    config.outputDir,
+    config.webpackConfig);
   debug('r:webpackConfig')(webpackConfig);
   return webpack(webpackConfig);
 };
@@ -190,4 +194,5 @@ module.exports = function(config) {
     });
   });
 };
+
 

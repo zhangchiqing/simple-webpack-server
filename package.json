@@ -32,7 +32,8 @@
   "dependencies": {
     "assert-plus": "^1.0.0",
     "css-loader": "^0.23.1",
-    "debug": "^2.2.0"
+    "debug": "^2.2.0",
+    "ramda": "^0.19.1"
   },
   "peerDependencies": {
     "webpack": "^1.12.0",
