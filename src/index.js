@@ -16,7 +16,7 @@ var fs = require('fs');
 var assert = require('assert-plus');
 var debug = require('debug');
 var R = require('ramda');
-var Promise = require('es6-promise');
+var Promise = require('es6-promise').Promise;
 
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
