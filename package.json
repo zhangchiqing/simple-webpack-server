@@ -1,13 +1,13 @@
 {
   "name": "simple-webpack-server",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Simplified webpack-dev-server for developing your module",
   "main": "./src/index.js",
   "scripts": {
     "test": "doctest --module commonjs src/index.js"
   },
   "engines": {
-    "node": ">=0.12"
+    "node": ">=0.10"
   },
   "repository": {
     "type": "git",
