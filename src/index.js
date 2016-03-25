@@ -45,26 +45,31 @@ var makeWebpackConfig = function(entry, outputDir, options) {
   assert.string(entry, 'entry');
   assert.string(outputDir, 'outputDir');
 
-  return R.merge({
-    entry: {
-      app: [
-        entry,
-        'webpack-dev-server/client?http://localhost:8087',
-        'webpack/hot/dev-server'],
-    },
+  var makeDefaults = R.merge({
+    entry: {},
     output: {
       path: path.resolve(outputDir),
       filename: getFileName(entry),
     },
     debug: true,
     devtool: 'sourcemap',
-    plugins: [new webpack.HotModuleReplacementPlugin()],
-    module: {
-        loaders: [
-            { test: /\.css$/, loader: 'style-loader!css-loader' }
-        ]
-    }
-  }, options);
+    plugins: [],
+    module: {},
+  });
+
+  var appendDevServerConfig = R.evolve({
+    entry: R.over(R.lensPath(['app']), R.pipe(
+      R.defaultTo([]),
+      R.concat([
+        entry,
+        'webpack-dev-server/client?http://localhost:8087',
+        'webpack/hot/dev-server']))),
+    plugins: R.append(new webpack.HotModuleReplacementPlugin()),
+    module: R.over(R.lensPath(['loaders']), R.append(
+      { test: /\.css$/, loader: 'style-loader!css-loader' }))
+  });
+
+  return appendDevServerConfig(makeDefaults(options));
 };
 
 var makeJS = function(compiler) {
@@ -157,7 +162,7 @@ var makeCompiler = function(config) {
     config.entry,
     config.outputDir,
     config.webpackConfig);
-  debug('r:webpackConfig')(webpackConfig);
+  debug('r:webpackConfig')(JSON.stringify(webpackConfig, null, 2));
   return webpack(webpackConfig);
 };
 
