@@ -1,6 +1,6 @@
 {
   "name": "simple-webpack-server",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Simplified webpack-dev-server for developing your module",
   "main": "./src/index.js",
   "scripts": {
