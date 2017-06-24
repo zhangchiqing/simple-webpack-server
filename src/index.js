@@ -51,7 +51,6 @@ var makeWebpackConfig = function(entry, outputDir, options) {
       path: path.resolve(outputDir),
       filename: getFileName(entry),
     },
-    debug: true,
     devtool: 'sourcemap',
     plugins: [],
     module: {},
@@ -61,7 +60,7 @@ var makeWebpackConfig = function(entry, outputDir, options) {
     entry: R.over(R.lensPath(['app']), R.pipe(
       R.defaultTo([]),
       R.concat([
-        entry,
+        path.resolve(entry),
         'webpack-dev-server/client?http://localhost:8087',
         'webpack/hot/dev-server']))),
     plugins: R.append(new webpack.HotModuleReplacementPlugin()),
@@ -69,7 +68,8 @@ var makeWebpackConfig = function(entry, outputDir, options) {
       { test: /\.css$/, loader: 'style-loader!css-loader' }))
   });
 
-  return appendDevServerConfig(makeDefaults(options));
+  var defaults = makeDefaults(options || {});
+  return appendDevServerConfig(defaults);
 };
 
 var makeJS = function(compiler) {
@@ -82,7 +82,7 @@ var makeJS = function(compiler) {
       poll: true // use polling instead of native watchers
     }, function(err, stats) {
       if (err) {
-        reject(err);
+        return reject(err);
       }
 
       debug('r:webpackjs')('webpack:build', stats.toString({
